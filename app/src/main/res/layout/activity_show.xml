@@ -7,7 +7,34 @@
     tools:context="fhku.a01min_vacation.ShowActivity">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:id="@+id/animation"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp">
+    <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+        android:oneshot="false" android:id="@+id/imageanimation">
+
+        <item android:drawable="@drawable/frame0" android:duration="150" />
+        <item android:drawable="@drawable/frame1" android:duration="150" />
+        <item android:drawable="@drawable/frame2" android:duration="150" />
+        <item android:drawable="@drawable/frame3" android:duration="150" />
+        <item android:drawable="@drawable/frame4" android:duration="150" />
+        <item android:drawable="@drawable/frame5" android:duration="150" />
+        <item android:drawable="@drawable/frame6" android:duration="150" />
+        <item android:drawable="@drawable/frame7" android:duration="150" />
+        <item android:drawable="@drawable/frame8" android:duration="150" />
+        <item android:drawable="@drawable/frame9" android:duration="150" />
+
+    </animation-list>
+    </ImageView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/animation"
+        android:layout_centerHorizontal="true"
+        android:text="Play"
+        />
 
 </RelativeLayout>
