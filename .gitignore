@@ -1,14 +1,36 @@
-APP_SOURCES/01min_Vacation/.gradle/
-APP_SOURCES/01min_Vacation/.idea/
-APP_SOURCES/01min_Vacation/*/build/
-APP_SOURCES/01min_Vacation/local.properties
-APP_SOURCES/01min_Vacation/.signing
-APP_SOURCES/01min_Vacation/*.iml
-APP_SOURCES/01min_Vacation.Trashes
+#built application files
+*.apk
+*.ap_
 
-.idea/
+# files for the dex VM
+*.dex
 
-.idea/workspace.xml
-*.xml
-.idea/workspace.xml
-.idea/workspace.xml
+# Java class files
+*.class
+
+# generated files
+bin/
+gen/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Windows thumbnail db
+Thumbs.db
+
+# OSX files
+.DS_Store
+
+# Android Studio
+*.iml
+.idea
+#.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
+.gradle
+build/
+.navigation
+captures/
+output.json 
+
+#NDK
+obj/
+.externalNativeBuild
