@@ -5,3 +5,4 @@ APP_SOURCES/LeanLabApp/local.properties
 APP_SOURCES/LeanLabApp/.signing
 APP_SOURCES/LeanLabApp/*.iml
 APP_SOURCES/LeanLabApp/.Trashes
+.idea/workspace.xml
