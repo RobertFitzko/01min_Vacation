@@ -17,12 +17,18 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <Button
         android:id="@+id/play"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_centerInParent="true"
-        android:text="Play"
-        />
+        android:layout_width="270dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+
+        android:layout_centerVertical="true"
+        android:background="@drawable/buttonshape"
+        android:text="Play!"
+        android:textColor="#0D0C07"
+        android:textSize="30sp" />
+/>
 
 </RelativeLayout>
