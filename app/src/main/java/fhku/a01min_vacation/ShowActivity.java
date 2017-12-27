@@ -15,7 +15,6 @@ public class ShowActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
 
-        animation = findViewById(R.id.imageanimation);
         animation.setBackgroundResource(R.drawable.animation);
     }
 

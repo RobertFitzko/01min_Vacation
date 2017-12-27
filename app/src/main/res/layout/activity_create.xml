@@ -8,7 +8,7 @@
 
 
     <Button
-        android:id="@+id/play"
+        android:id="@+id/pics"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
@@ -17,26 +17,24 @@
         android:layout_marginEnd="13dp"
         android:background="@drawable/buttonshape"
         android:radius="40dp"
-        android:onClick="show"
-        android:text="PLAY" />
+        android:text="Get Pictures" />
 
     <Button
-        android:id="@+id/create"
+        android:id="@+id/music"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:layout_alignStart="@+id/play"
-        android:layout_alignTop="@+id/play"
-        android:layout_marginTop="69dp"
+        android:layout_alignStart="@+id/pics"
+        android:layout_alignTop="@+id/pics"
+        android:layout_marginTop="70dp"
         android:background="@drawable/buttonshape"
-        android:text="CREATE"
-        android:onClick="create"/>
+        android:text="Get Music" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:background="@drawable/background_main"
         app:srcCompat="@drawable/frame0" />
 
