@@ -34,3 +34,6 @@ output.json
 #NDK
 obj/
 .externalNativeBuild
+*.bin
+*.lock
+.gradle/4.1/taskHistory/taskHistory.bin
