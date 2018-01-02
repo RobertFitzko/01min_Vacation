@@ -10,7 +10,7 @@ import android.widget.ViewFlipper;
 
 public class ShowActivity extends AppCompatActivity {
 
-    private ViewFlipper viewFlipper;
+     ViewFlipper viewFlipper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +18,7 @@ public class ShowActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show);
 
         viewFlipper = (ViewFlipper) this.findViewById(R.id.viewflipper);
+        viewFlipper.setFlipInterval(1000);
 
 
 
