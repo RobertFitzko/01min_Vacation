@@ -17,7 +17,6 @@
         android:layout_marginEnd="13dp"
         android:background="@drawable/buttonshape"
         android:radius="40dp"
-        android:onClick="show"
         android:text="PLAY" />
 
     <Button
@@ -28,8 +27,7 @@
         android:layout_alignTop="@+id/play"
         android:layout_marginTop="69dp"
         android:background="@drawable/buttonshape"
-        android:text="CREATE"
-        android:onClick="create"/>
+        android:text="CREATE" />
 
     <ImageView
         android:id="@+id/imageView"
