@@ -18,7 +18,7 @@ public class ShowActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show);
 
         viewFlipper = (ViewFlipper) this.findViewById(R.id.viewflipper);
-        viewFlipper.setFlipInterval(1000);
+        viewFlipper.setFlipInterval(5000);
 
 
 
