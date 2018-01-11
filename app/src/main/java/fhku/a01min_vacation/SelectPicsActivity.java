@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
+import java.io.File;
+
 public class SelectPicsActivity extends AppCompatActivity {
 
     public ImageButton[] selectButtons = new ImageButton[8];
@@ -39,6 +41,10 @@ public class SelectPicsActivity extends AppCompatActivity {
         selectButtons[7] = (ImageButton) findViewById(R.id.pic8);
 
         for (int i = 0; i<selectButtons.length;i++) {
+            String uri = saveData.getString("Index" + i, null);
+            if (uri != null){
+                selectButtons[i].setImageURI(Uri.fromFile(new File(uri)));
+            }
             final int j = i;
             selectButtons[i].setOnClickListener(new View.OnClickListener() {
 
@@ -51,7 +57,6 @@ public class SelectPicsActivity extends AppCompatActivity {
                     //IMG PICKER
                     Intent intent = new Intent();
                     intent.setType("image/*");
-                    intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                     intent.putExtra("Index", j);
                     intent.setAction(Intent.ACTION_GET_CONTENT);
                     startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURES);
@@ -67,6 +72,9 @@ public class SelectPicsActivity extends AppCompatActivity {
         if (requestCode == SELECT_PICTURES) {
             if (resultCode == Activity.RESULT_OK) {
                 Log.i("Image Index", "" + lastSelectedIndex);
+                SharedPreferences.Editor editor = saveData.edit();
+                editor.putString("Index" + lastSelectedIndex, data.getClipData().getItemAt(0).getUri().toString());
+                editor.apply();
                 /*
                 if(data.getClipData() != null) {
                     int count = data.getClipData().getItemCount();
