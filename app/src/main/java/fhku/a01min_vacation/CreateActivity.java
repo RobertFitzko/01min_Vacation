@@ -35,12 +35,15 @@ public class CreateActivity extends AppCompatActivity {
                 startActivity(intent);*/
 
                 //IMG PICKER
-
+                Intent intent = new Intent(CreateActivity.this,SelectPicsActivity.class);
+                startActivity(intent);
+/*
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent,"Select Picture"), SELECT_PICTURES);
+                */
             }
         });
         musicButton=(Button)findViewById(R.id.music);
