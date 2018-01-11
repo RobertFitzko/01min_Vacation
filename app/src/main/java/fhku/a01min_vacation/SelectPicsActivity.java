@@ -16,6 +16,7 @@ public class SelectPicsActivity extends AppCompatActivity {
     public int SELECT_PICTURES;
     public String[] paths = new String[8];
     public SharedPreferences saveData;
+    public int lastSelectedIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class SelectPicsActivity extends AppCompatActivity {
                     intent.putExtra("Index", j);
                     intent.setAction(Intent.ACTION_GET_CONTENT);
                     startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURES);
-
+                    lastSelectedIndex = j;
                 }
             });
         }
@@ -65,7 +66,7 @@ public class SelectPicsActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SELECT_PICTURES) {
             if (resultCode == Activity.RESULT_OK) {
-                Log.i("Image Index", "" + data.getIntExtra("Index", -1));
+                Log.i("Image Index", "" + lastSelectedIndex);
                 /*
                 if(data.getClipData() != null) {
                     int count = data.getClipData().getItemCount();
