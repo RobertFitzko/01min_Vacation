@@ -58,7 +58,7 @@ public class SelectPicsActivity extends AppCompatActivity {
                     Intent intent = new Intent();
                     intent.setType("image/*");
                     intent.putExtra("Index", j);
-                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    intent.setAction(Intent.ACTION_PICK);
                     startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURES);
                     lastSelectedIndex = j;
                 }
