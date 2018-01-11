@@ -82,6 +82,7 @@
         android:layout_alignStart="@+id/pic7"
         android:layout_below="@+id/pic7"
         android:background="@drawable/buttonshape"
+        android:layout_marginBottom="10dp"
         android:text="Los gehts!" />
 
 </RelativeLayout>
