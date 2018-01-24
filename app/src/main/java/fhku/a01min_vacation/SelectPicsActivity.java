@@ -23,6 +23,7 @@ public class SelectPicsActivity extends AppCompatActivity {
     public static final int IMAGE_GALLERY_REQUEST = 20;
     public ImageButton[] images = new ImageButton[6];
     public SharedPreferences saveData;
+    public int currentImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,29 @@ public class SelectPicsActivity extends AppCompatActivity {
 
                     //invoking Activity for Result
                     startActivityForResult(imagePickerIntent, IMAGE_GALLERY_REQUEST);
+                    //switch case um jeweils Bild auf den jeweils geklickten Button zuzuweisen
+                    switch (v.getId()) {
+                        case R.id.pic1:
+                            currentImageButton = 0;
+                            break;
+                        case R.id.pic2:
+                            currentImageButton = 1;
+                            break;
+                        case R.id.pic3:
+                            currentImageButton = 2;
+                            break;
+                        case R.id.pic4:
+                            currentImageButton = 3;
+                            break;
+                        case R.id.pic5:
+                            currentImageButton = 4;
+                            break;
+                        case R.id.pic6:
+                            currentImageButton = 5;
+                            break;
+                        default:
+                            throw new RuntimeException("Unknow button ID");
+                    }
                 }
             });
         }
@@ -80,13 +104,9 @@ public class SelectPicsActivity extends AppCompatActivity {
                     //get bitmap from stram
                     Bitmap image = BitmapFactory.decodeStream(inputStream);
 
-                    //show image
-
-                    int i = 0;
-                    if (images[i].getDrawable() == null) {
-                        images[i].setImageBitmap(image);
-                    } else if (images[i].getDrawable() != null) {
-                        images[i + 1].setImageBitmap(image);
+                    //image wird auf den jeweiligen button gesetzt falls frei
+                    if (images[currentImageButton].getDrawable() == null) {
+                        images[currentImageButton].setImageBitmap(image);
                     }
 
 

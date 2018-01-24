@@ -68,6 +68,7 @@
         android:layout_below="@+id/pic5"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="Start!" />
+        android:text="Start!"
+        android:background="@drawable/buttonshape"/>
 
 </RelativeLayout>
