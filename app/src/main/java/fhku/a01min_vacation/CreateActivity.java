@@ -65,8 +65,7 @@ public class CreateActivity extends AppCompatActivity {
         init();
 
     }
-    //IMG PICKER
-
+/*
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -97,5 +96,5 @@ public class CreateActivity extends AppCompatActivity {
         for (int i = 0;i< paths.length;i++){
             Log.i("ARRAYCHECK","ARRAYNO "+i+" CONTAINS: "+paths[i]);
         }
-    }
+    }*/
 }

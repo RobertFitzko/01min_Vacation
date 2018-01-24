@@ -54,13 +54,16 @@ public class SelectPicsActivity extends AppCompatActivity {
                     //Wo sind die Bilder?
                     File pictureDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
                     String pictureDirectoryPath = pictureDirectory.getPath();
+
                     //URI
                     Uri data = Uri.parse(pictureDirectoryPath);
-                    //set data and type - all image types
+
+                    //Data und Typ setzen, in diesem Fall alle Bild-Dateitypen
                     imagePickerIntent.setDataAndType(data, "image/*");
 
-                    //invoking Activity for Result
+                    //Activity for Result aufrufen
                     startActivityForResult(imagePickerIntent, IMAGE_GALLERY_REQUEST);
+
                     //switch case um jeweils Bild auf den jeweils geklickten Button zuzuweisen
                     switch (v.getId()) {
                         case R.id.pic1:
@@ -89,24 +92,24 @@ public class SelectPicsActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if ( resultCode == RESULT_OK) {
+            //wenn es sich wirklich um einen aufruf von unseren buttons handelt
             if(requestCode==IMAGE_GALLERY_REQUEST){
                 Uri imageUri = data.getData();
-                //input stream for pictures with exception handling
+                //input stream für Bilder mit nötigem trycatch
                 InputStream inputStream;
 
                 try {
                     inputStream = getContentResolver().openInputStream(imageUri);
-                    //get bitmap from stram
+                    //get bitmap from stream
                     Bitmap image = BitmapFactory.decodeStream(inputStream);
 
                     //image wird auf den jeweiligen button gesetzt falls frei
                         images[currentImageButton].setImageBitmap(image);
-                    
+
                     //falls das Bild nicht gefunden werden kann
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
