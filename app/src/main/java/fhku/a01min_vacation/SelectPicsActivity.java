@@ -105,12 +105,8 @@ public class SelectPicsActivity extends AppCompatActivity {
                     Bitmap image = BitmapFactory.decodeStream(inputStream);
 
                     //image wird auf den jeweiligen button gesetzt falls frei
-                    if (images[currentImageButton].getDrawable() == null) {
                         images[currentImageButton].setImageBitmap(image);
-                    }
-
-
-
+                    
                     //falls das Bild nicht gefunden werden kann
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
