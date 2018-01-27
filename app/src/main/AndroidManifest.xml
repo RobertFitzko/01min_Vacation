@@ -26,9 +26,10 @@
         </activity>
         <activity
             android:name=".ShowActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".CreateActivity" />
-        <activity android:name=".SelectPicsActivity"></activity>
+        <activity android:name=".SelectPicsActivity" />
+        <activity android:name=".SelectMusic"></activity>
     </application>
 
 </manifest>

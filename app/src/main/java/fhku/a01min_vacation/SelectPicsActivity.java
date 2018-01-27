@@ -24,6 +24,7 @@ public class SelectPicsActivity extends AppCompatActivity {
     public ImageButton[] images = new ImageButton[6];
     public SharedPreferences saveData;
     public int currentImageButton;
+    public Button backSelectPicsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,19 @@ public class SelectPicsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_pics);
 
         init();
+        backStepPic();
+
+    }
+
+    public void backStepPic(){
+        backSelectPicsButton=findViewById(R.id.back_select_pics);
+        backSelectPicsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SelectPicsActivity.this, CreateActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void init() {

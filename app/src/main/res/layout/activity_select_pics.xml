@@ -62,13 +62,13 @@
 
 
     <Button
-        android:id="@+id/showgrid"
+        android:id="@+id/back_select_pics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/pic5"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="Start!"
+        android:text="Back"
         android:background="@drawable/buttonshape"/>
 
 </RelativeLayout>

@@ -21,6 +21,7 @@ public class CreateActivity extends AppCompatActivity {
 
     public Button picButton;
     public Button musicButton;
+    public Button backCreateButton;
     public int SELECT_PICTURES;
     public String[] paths = new String[6];
 
@@ -50,10 +51,19 @@ public class CreateActivity extends AppCompatActivity {
         musicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* Intent intent = new Intent(CreateActivity.this,ShowActivity.class);
-                startActivity(intent);*/
+               Intent intent = new Intent(CreateActivity.this,SelectMusic.class);
+                startActivity(intent);
             }
         });
+        backCreateButton=(Button)findViewById(R.id.back_create);
+        backCreateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CreateActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 
@@ -65,6 +75,8 @@ public class CreateActivity extends AppCompatActivity {
         init();
 
     }
+
+
 /*
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
