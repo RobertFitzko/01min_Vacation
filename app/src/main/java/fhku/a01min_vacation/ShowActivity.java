@@ -28,6 +28,7 @@ public class ShowActivity extends AppCompatActivity {
         viewFlipper = (ViewFlipper) this.findViewById(R.id.viewflipper);
 
         viewFlipper.setFlipInterval(5000);
+        
 
         //Mediaplayer für Musik im Hintergrund, momentan mit fixer Musik
         mMediaPlayer = new MediaPlayer();

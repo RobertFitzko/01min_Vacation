@@ -7,14 +7,25 @@
     tools:context="fhku.a01min_vacation.SelectMusic">
 
     <Button
+        android:id="@+id/get_music"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+
+        android:layout_alignBottom="@+id/back_select_music"
+        android:layout_alignStart="@+id/back_select_music"
+        android:layout_marginBottom="65dp"
+        android:background="@drawable/buttonshape"
+        android:text="get music!" />
+
+    <Button
         android:id="@+id/back_select_music"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:layout_alignStart="@+id/music"
-        android:layout_alignTop="@+id/music"
-        android:layout_marginTop="70dp"
-        android:background="@drawable/buttonshape"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="190dp"
+        android:background="@drawable/buttonshape"
         android:text="Back" />
+
 
 </RelativeLayout>
