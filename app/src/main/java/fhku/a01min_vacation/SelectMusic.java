@@ -24,6 +24,7 @@ public class SelectMusic extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SelectMusic.this, CreateActivity.class);
+                startActivity(intent);
             }
         });
     }

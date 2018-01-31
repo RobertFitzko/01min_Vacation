@@ -18,6 +18,7 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 public class SelectPicsActivity extends AppCompatActivity {
     public static final int IMAGE_GALLERY_REQUEST = 20;
@@ -25,6 +26,7 @@ public class SelectPicsActivity extends AppCompatActivity {
     public SharedPreferences saveData;
     public int currentImageButton;
     public Button backSelectPicsButton;
+    public Uri[] picUri = new Uri[6];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,8 +115,11 @@ public class SelectPicsActivity extends AppCompatActivity {
             //wenn es sich wirklich um einen aufruf von unseren buttons handelt
             if(requestCode==IMAGE_GALLERY_REQUEST){
                 Uri imageUri = data.getData();
+                picUri[currentImageButton] = imageUri;
+                Log.i("PicUri = ",""+ picUri[currentImageButton]);
                 //input stream für Bilder mit nötigem trycatch
                 InputStream inputStream;
+
 
                 try {
                     inputStream = getContentResolver().openInputStream(imageUri);
@@ -123,6 +128,7 @@ public class SelectPicsActivity extends AppCompatActivity {
 
                     //image wird auf den jeweiligen button gesetzt falls frei
                         images[currentImageButton].setImageBitmap(image);
+
 
                     //falls das Bild nicht gefunden werden kann
                 } catch (FileNotFoundException e) {
