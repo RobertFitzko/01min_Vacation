@@ -35,7 +35,6 @@ public class SelectPicsActivity extends AppCompatActivity {
 
         init();
         backStepPic();
-
     }
 
     public void backStepPic(){
