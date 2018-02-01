@@ -71,20 +71,20 @@ public class SelectMusic extends AppCompatActivity {
         });
     }
 
-   @Override
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-       super.onActivityResult(requestCode, resultCode, data);
-       if(resultCode == RESULT_OK && requestCode == MUSIC_GALLERY_REQUEST){
-           Uri uriSound=data.getData();
-           Toast.makeText(this, "Music selected!", Toast.LENGTH_LONG).show();
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == MUSIC_GALLERY_REQUEST) {
+            Uri uriSound = data.getData();
+            Toast.makeText(this, "Music selected!", Toast.LENGTH_LONG).show();
 
-           musicUri=uriSound;
-           Log.i("MusicUri=",""+musicUri);
+            musicUri = uriSound;
+            Log.i("MusicUri=", "" + musicUri);
 
-       }
-   }
-
+        }
     }
+
+}
 
 
 

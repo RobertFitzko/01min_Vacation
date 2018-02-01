@@ -26,8 +26,8 @@ public class CreateActivity extends AppCompatActivity {
     public String[] paths = new String[6];
 
 
-    public void init(){
-        picButton=(Button)findViewById(R.id.pics);
+    public void init() {
+        picButton = (Button) findViewById(R.id.pics);
         picButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,7 +36,7 @@ public class CreateActivity extends AppCompatActivity {
                 startActivity(intent);*/
 
                 //IMG PICKER
-                Intent intent = new Intent(CreateActivity.this,SelectPicsActivity.class);
+                Intent intent = new Intent(CreateActivity.this, SelectPicsActivity.class);
                 startActivity(intent);
 /*
                 Intent intent = new Intent();
@@ -47,15 +47,15 @@ public class CreateActivity extends AppCompatActivity {
                 */
             }
         });
-        musicButton=(Button)findViewById(R.id.music);
+        musicButton = (Button) findViewById(R.id.music);
         musicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent intent = new Intent(CreateActivity.this,SelectMusic.class);
+                Intent intent = new Intent(CreateActivity.this, SelectMusic.class);
                 startActivity(intent);
             }
         });
-        backCreateButton=(Button)findViewById(R.id.back_create);
+        backCreateButton = (Button) findViewById(R.id.back_create);
         backCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,8 +65,6 @@ public class CreateActivity extends AppCompatActivity {
         });
 
     }
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
