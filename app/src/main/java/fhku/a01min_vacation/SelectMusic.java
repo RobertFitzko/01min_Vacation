@@ -2,6 +2,7 @@ package fhku.a01min_vacation;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
@@ -28,6 +29,7 @@ public class SelectMusic extends AppCompatActivity {
     public Button backSelectMusicButton;
     public Button getMusic;
     public Uri musicUri;
+    public SharedPreferences saveM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class SelectMusic extends AppCompatActivity {
 
         backStepMusic();
         init();
+        //saveMusic(index, musicUri);
 
     }
 
@@ -58,12 +61,12 @@ public class SelectMusic extends AppCompatActivity {
             public void onClick(View v) {
 
                 //impliziter Intent für Gallerie
-                Intent musicPickerIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+                Intent musicPickerIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT, android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
 
                 File musicDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
                 String musicDirectoryPath = musicDirectory.getPath();
 
-                Uri data = Uri.parse(musicDirectoryPath);
+                Uri dataM = Uri.parse(musicDirectoryPath);
                 //Activity for Result aufrufen
                 startActivityForResult(musicPickerIntent, MUSIC_GALLERY_REQUEST);
 
@@ -72,16 +75,24 @@ public class SelectMusic extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent dataM) {
+        super.onActivityResult(requestCode, resultCode, dataM);
         if (resultCode == RESULT_OK && requestCode == MUSIC_GALLERY_REQUEST) {
-            Uri uriSound = data.getData();
+            Uri uriSound = dataM.getData();
             Toast.makeText(this, "Music selected!", Toast.LENGTH_LONG).show();
 
             musicUri = uriSound;
             Log.i("MusicUri=", "" + musicUri);
 
         }
+    }
+    public void saveMusic(int index, Uri musicUri) {
+
+        SharedPreferences.Editor editor = saveM.edit();
+        editor.putString("music" + index, musicUri.toString());
+        editor.commit();
+
+        Log.i("SAVE IMAGES", "Uri: " + musicUri + ", index: " + index);
     }
 
 }
