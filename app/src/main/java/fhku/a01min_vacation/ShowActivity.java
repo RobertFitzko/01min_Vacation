@@ -36,20 +36,14 @@ public class ShowActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
 
-/*        ImageView imageView1 = findViewById(R.id.image1);
-        ImageView imageView2 = findViewById(R.id.image2);
-        ImageView imageView3 = findViewById(R.id.image3);
-        ImageView imageView4 = findViewById(R.id.image4);
-        ImageView imageView5 = findViewById(R.id.image5);
-        ImageView imageView6 = findViewById(R.id.image6);*/
-
-
         //Mediaplayer für Musik im Hintergrund, momentan mit fixer Musik
         mMediaPlayer = new MediaPlayer();
         mMediaPlayer = MediaPlayer.create(this, R.raw.song);
         mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mMediaPlayer.setLooping(true);
         mMediaPlayer.start();
+
+        //ImageSwitcher für die Slideshow
 
         imageSwitcher = (ImageSwitcher) this.findViewById(R.id.imageswitcher);
 
@@ -58,8 +52,8 @@ public class ShowActivity extends AppCompatActivity {
         imageSwitcher.setInAnimation(in);
         imageSwitcher.setAnimation(out);
 
+        //autostart und switch
         imageSwitcher.postDelayed(new Runnable() {
-
             private int index = 0;
             public void run() {
                 imageSwitcher.setImageResource((imageNames[index]));
@@ -101,6 +95,7 @@ public class ShowActivity extends AppCompatActivity {
         finish();
         return;
     }
+    
     public int getDrawableResIdByName(String resName)  {
         String pkgName = this.getPackageName();
         // Return 0 if not found.
