@@ -29,7 +29,7 @@ public class ShowActivity extends AppCompatActivity {
     ImageSwitcher imageSwitcher;
     MediaPlayer mMediaPlayer;
     private int currentIndex;
-    private final String[] imageNames={"picture1", "picture2", "picture3"};
+    private final int[] imageNames={R.drawable.picture1, R.drawable.picture2, R.drawable.picture3,R.drawable.picture4, R.drawable.picture5, R.drawable.picture6};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,30 +53,29 @@ public class ShowActivity extends AppCompatActivity {
 
         imageSwitcher = (ImageSwitcher) this.findViewById(R.id.imageswitcher);
 
-        Animation out = AnimationUtils.loadAnimation(this, android.R.anim.fade_out);
-        Animation in = AnimationUtils.loadAnimation(this, android.R.anim.fade_in);
-
+        Animation in = AnimationUtils.loadAnimation(this, R.anim.in_from_left);
+        Animation out = AnimationUtils.loadAnimation(this,R.anim.out_from_right);
         imageSwitcher.setInAnimation(in);
         imageSwitcher.setAnimation(out);
 
         imageSwitcher.postDelayed(new Runnable() {
-            int i = 0;
+
+            private int index = 0;
             public void run() {
-                imageSwitcher.setImageResource(
-                        i++ % 2 == 0 ?
-                                R.drawable.picture1 :
-                                R.drawable.picture2);
-                imageSwitcher.postDelayed(this, 1000);
+                imageSwitcher.setImageResource((imageNames[index]));
+                if(index==(imageNames.length-1))
+                    index = 0;
+                else
+                    index++;
+                imageSwitcher.postDelayed(this, 5000);
             }
-        }, 10000);
+        }, 5000);
 
         imageSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
             public View makeView() {
                 ImageView imageView = new ImageView(getApplicationContext());
 
                 imageView.setBackgroundColor(Color.LTGRAY);
-                imageView.setScaleType(ImageView.ScaleType.CENTER);
-
                 ImageSwitcher.LayoutParams params = new ImageSwitcher.LayoutParams(
                         MATCH_PARENT, MATCH_PARENT);
                 imageView.setLayoutParams(params);
@@ -87,9 +86,9 @@ public class ShowActivity extends AppCompatActivity {
         this.showImage(this.currentIndex);
     }
         private void showImage(int imgIndex) {
-            String imageName= this.imageNames[imgIndex];
+            int imageName= this.imageNames[imgIndex];
 
-            int resId= getDrawableResIdByName(imageName);
+            int resId= getDrawableResIdByName(String.valueOf(imageName));
             if(resId!=  0) {
                 this.imageSwitcher.setImageResource(resId);
             }
