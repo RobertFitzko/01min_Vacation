@@ -3,15 +3,15 @@
     android:layout_height="fill_parent"
 >
 
-    <ViewFlipper
-        android:id="@+id/viewflipper"
+    <ImageSwitcher
+        android:id="@+id/imageswitcher"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autoStart="true"
         android:inAnimation="@anim/in_from_right"
         android:outAnimation="@anim/out_from_left">
 
-        <ImageView
+<!--        <ImageView
             android:id="@+id/image1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -45,8 +45,8 @@
             android:id="@+id/image6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-             />
-    </ViewFlipper>
+             />-->
+    </ImageSwitcher>
 
 
 </RelativeLayout>
