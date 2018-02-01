@@ -10,42 +10,6 @@
         android:autoStart="true"
         android:inAnimation="@anim/in_from_right"
         android:outAnimation="@anim/out_from_left">
-
-<!--        <ImageView
-            android:id="@+id/image1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-             />
-
-        <ImageView
-            android:id="@+id/image2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-
-        <ImageView
-            android:id="@+id/image3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-             />
-
-        <ImageView
-            android:id="@+id/image4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-             />
-
-        <ImageView
-        android:id="@+id/image5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-         />
-
-        <ImageView
-            android:id="@+id/image6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-             />-->
     </ImageSwitcher>
 
 

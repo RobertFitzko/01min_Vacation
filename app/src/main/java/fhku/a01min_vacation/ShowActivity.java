@@ -1,7 +1,7 @@
 package fhku.a01min_vacation;
 
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -26,15 +26,21 @@ import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 public class ShowActivity extends AppCompatActivity {
 
+    SharedPreferences sp = getSharedPreferences("01minute", MODE_PRIVATE);
     ImageSwitcher imageSwitcher;
     MediaPlayer mMediaPlayer;
     private int currentIndex;
-    private final int[] imageNames={R.drawable.picture1, R.drawable.picture2, R.drawable.picture3,R.drawable.picture4, R.drawable.picture5, R.drawable.picture6};
+    private final int[] imageNames =
+            {R.drawable.picture1, R.drawable.picture2, R.drawable.picture3, R.drawable.picture4, R.drawable.picture5, R.drawable.picture6};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
+
+        //Zum auselesn der Shared preferences?!
+/*        String value=(sp.getString("image", null));
+        Log.i("AUSGELESEN","ist:"+value);*/
 
         //Mediaplayer für Musik im Hintergrund, momentan mit fixer Musik
         mMediaPlayer = new MediaPlayer();
@@ -44,20 +50,21 @@ public class ShowActivity extends AppCompatActivity {
         mMediaPlayer.start();
 
         //ImageSwitcher für die Slideshow
-
         imageSwitcher = (ImageSwitcher) this.findViewById(R.id.imageswitcher);
 
+        //Animation für die Slideshow
         Animation in = AnimationUtils.loadAnimation(this, R.anim.in_from_left);
-        Animation out = AnimationUtils.loadAnimation(this,R.anim.out_from_right);
+        Animation out = AnimationUtils.loadAnimation(this, R.anim.out_from_right);
         imageSwitcher.setInAnimation(in);
         imageSwitcher.setAnimation(out);
 
         //autostart und switch
         imageSwitcher.postDelayed(new Runnable() {
             private int index = 0;
+
             public void run() {
                 imageSwitcher.setImageResource((imageNames[index]));
-                if(index==(imageNames.length-1))
+                if (index == (imageNames.length - 1))
                     index = 0;
                 else
                     index++;
@@ -79,14 +86,23 @@ public class ShowActivity extends AppCompatActivity {
         this.currentIndex = 0;
         this.showImage(this.currentIndex);
     }
-        private void showImage(int imgIndex) {
-            int imageName= this.imageNames[imgIndex];
 
-            int resId= getDrawableResIdByName(String.valueOf(imageName));
-            if(resId!=  0) {
-                this.imageSwitcher.setImageResource(resId);
-            }
+    private void showImage(int imgIndex) {
+        int imageName = this.imageNames[imgIndex];
+
+        int resId = getDrawableResIdByName(String.valueOf(imageName));
+        if (resId != 0) {
+            this.imageSwitcher.setImageResource(resId);
         }
+    }
+
+    public int getDrawableResIdByName(String resName) {
+        String pkgName = this.getPackageName();
+        // Return 0 if not found.
+        int resID = this.getResources().getIdentifier(resName, "drawable", pkgName);
+        Log.i("MyLog", "Res Name: " + resName + "==> Res ID = " + resID);
+        return resID;
+    }
 
     //damit die Musik endet wenn man die Activity verlässt
     @Override
@@ -94,14 +110,6 @@ public class ShowActivity extends AppCompatActivity {
         mMediaPlayer.stop();
         finish();
         return;
-    }
-    
-    public int getDrawableResIdByName(String resName)  {
-        String pkgName = this.getPackageName();
-        // Return 0 if not found.
-        int resID = this.getResources().getIdentifier(resName , "drawable", pkgName);
-        Log.i("MyLog", "Res Name: " + resName + "==> Res ID = " + resID);
-        return resID;
     }
 }
 
