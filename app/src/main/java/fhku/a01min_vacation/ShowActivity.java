@@ -17,8 +17,8 @@ import java.util.HashMap;
 
 public class ShowActivity extends AppCompatActivity {
 
-     ViewFlipper viewFlipper;
-     MediaPlayer mMediaPlayer;
+    ViewFlipper viewFlipper;
+    MediaPlayer mMediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class ShowActivity extends AppCompatActivity {
         viewFlipper = (ViewFlipper) this.findViewById(R.id.viewflipper);
 
         viewFlipper.setFlipInterval(5000);
-        
+
 
         //Mediaplayer für Musik im Hintergrund, momentan mit fixer Musik
         mMediaPlayer = new MediaPlayer();
@@ -40,8 +40,8 @@ public class ShowActivity extends AppCompatActivity {
     }
 
     //damit die Musik endet wenn man die Activity verlässt
-@Override
-    public void onBackPressed(){
+    @Override
+    public void onBackPressed() {
         mMediaPlayer.stop();
         finish();
         return;

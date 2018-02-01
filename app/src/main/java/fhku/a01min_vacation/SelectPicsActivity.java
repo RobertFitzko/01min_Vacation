@@ -120,7 +120,6 @@ public class SelectPicsActivity extends AppCompatActivity {
                 //input stream für Bilder mit nötigem trycatch
                 InputStream inputStream;
 
-
                 try {
                     inputStream = getContentResolver().openInputStream(imageUri);
                     //get bitmap from stream
@@ -128,7 +127,6 @@ public class SelectPicsActivity extends AppCompatActivity {
 
                     //image wird auf den jeweiligen button gesetzt falls frei
                         images[currentImageButton].setImageBitmap(image);
-
 
                     //falls das Bild nicht gefunden werden kann
                 } catch (FileNotFoundException e) {

@@ -11,20 +11,20 @@ public class MainActivity extends AppCompatActivity {
     public Button createButton;
     public Button showButton;
 
-    public void init(){
-        createButton=(Button)findViewById(R.id.create);
+    public void init() {
+        createButton = (Button) findViewById(R.id.create);
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,CreateActivity.class);
+                Intent intent = new Intent(MainActivity.this, CreateActivity.class);
                 startActivity(intent);
             }
         });
-        showButton=(Button)findViewById(R.id.play);
+        showButton = (Button) findViewById(R.id.play);
         showButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,ShowActivity.class);
+                Intent intent = new Intent(MainActivity.this, ShowActivity.class);
                 startActivity(intent);
             }
         });
