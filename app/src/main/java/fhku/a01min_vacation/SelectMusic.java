@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Environment;
@@ -29,7 +30,12 @@ public class SelectMusic extends AppCompatActivity {
     public Button backSelectMusicButton;
     public Button getMusic;
     public Uri musicUri;
+    //in der saveM müsste es jetzt drinnen sein
     public SharedPreferences saveM;
+    public int currentMusic;
+    MediaPlayer mp, mnp;
+    Context c;
+    Uri uri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +44,6 @@ public class SelectMusic extends AppCompatActivity {
 
         backStepMusic();
         init();
-        //saveMusic(index, musicUri);
 
     }
 
@@ -69,11 +74,58 @@ public class SelectMusic extends AppCompatActivity {
                 Uri dataM = Uri.parse(musicDirectoryPath);
                 //Activity for Result aufrufen
                 startActivityForResult(musicPickerIntent, MUSIC_GALLERY_REQUEST);
+//neu
+                try{
+                    saveM = getSharedPreferences("mypref",0);
+                    String audiouri = saveM.getString("music", null);
+                    if (audiouri !=null) {
+                        Uri mUri = Uri.parse(audiouri);
+                        mnp.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                        mnp.setDataSource(c, mUri);
+                        mnp.prepare();
+                        mnp.start();
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
 
             }
         });
-    }
 
+    }
+//neu
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent dataM) {
+        super.onActivityResult(requestCode, resultCode, dataM);
+        if (requestCode == 1) {
+            if (dataM != null) {
+                mp = new MediaPlayer();
+                mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                try {
+                    uri = dataM.getData();
+                    String pathm = uri.toString();
+                    SharedPreferences.Editor editor = getSharedPreferences("mypref", 0).edit();
+                    editor.putString("useraudio ", pathm);
+                    editor.commit();
+                    if (uri != null) {
+                        mp.setDataSource(getApplicationContext(), uri);
+                        mp.prepare();
+                        mp.start();
+                       Log.i("Index = ", pathm);
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+
+
+        }
+
+    }
+}
+
+
+/*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent dataM) {
         super.onActivityResult(requestCode, resultCode, dataM);
@@ -83,6 +135,7 @@ public class SelectMusic extends AppCompatActivity {
 
             musicUri = uriSound;
             Log.i("MusicUri=", "" + musicUri);
+            //this.saveMusic(,musicUri);
 
         }
     }
@@ -92,13 +145,16 @@ public class SelectMusic extends AppCompatActivity {
         editor.putString("music" + index, musicUri.toString());
         editor.commit();
 
-        Log.i("SAVE IMAGES", "Uri: " + musicUri + ", index: " + index);
+        Log.i("SAVE MUSIC", "Uri: " + musicUri + ", index: " + index);
     }
 
-}
+    public void loadMusic(){
+        String uri = saveM.getString("music",null);
+        Log.i("SAVE MUSIC", "Uri = "+ musicUri);
 
+        if (uri != null) {
+            Uri parsedUri = Uri.parse(uri);
 
-
-
-
-
+        }
+    }
+*/
