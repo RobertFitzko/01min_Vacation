@@ -172,7 +172,7 @@ public class SelectPicsActivity extends AppCompatActivity {
             //falls das Bild nicht gefunden werden kann
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            Toast.makeText(this,"Bild konnte nicht gefunden werden",Toast.LENGTH_LONG).show();
+            
         }
 
     }
