@@ -30,16 +30,12 @@ public class SelectMusic extends AppCompatActivity {
     public Button backSelectMusicButton;
     public Button getMusic;
     public Uri musicUri;
-    //in der saveM müsste es jetzt drinnen sein
     public SharedPreferences saveM;
-    public Uri[] muUri = new Uri[1];
-    public int currentMusic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_music);
-
         backStepMusic();
         init();
 
@@ -56,8 +52,9 @@ public class SelectMusic extends AppCompatActivity {
         });
     }
 
-
     public void init() {
+        saveM = getSharedPreferences("01Minute", MODE_PRIVATE);
+
         getMusic = findViewById(R.id.get_music);
         getMusic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,32 +64,14 @@ public class SelectMusic extends AppCompatActivity {
                 Intent musicPickerIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT, android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
                 Log.i("Music Picker", musicPickerIntent.toString());
                 File musicDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
+
                 String musicDirectoryPath = musicDirectory.getPath();
-                Log.i("Music Path", musicDirectoryPath);
-                //da haben wir das path schon mit musicDirectoryPath
-                Uri dataM = Uri.parse(musicDirectoryPath);
-                dataM = musicUri;
+
+                Uri data = Uri.parse(musicDirectoryPath);
+                musicPickerIntent.setDataAndType(data, "audio/*");
+
                 //Activity for Result aufrufen
                 startActivityForResult(musicPickerIntent, MUSIC_GALLERY_REQUEST);
-
-
-//neu
-                /*
-                try{
-                    saveM = getSharedPreferences("musicDirectoryPath",0);
-                    String audiouri = saveM.getString("musicDirectoryPath", null);
-                    if (audiouri !=null) {
-                        Uri mUri = Uri.parse(audiouri);
-                        mnp.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                        mnp.setDataSource(c, mUri);
-                        mnp.prepare();
-                        mnp.start();
-                        Log.i("Shared Path", audiouri);
-                    }
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-                */
 
             }
 
@@ -102,46 +81,35 @@ public class SelectMusic extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if ( resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK) {
             //wenn es sich wirklich um einen aufruf von unseren buttons handelt
-            if(requestCode==MUSIC_GALLERY_REQUEST){
+            if (requestCode == MUSIC_GALLERY_REQUEST) {
                 Uri musicUri = data.getData();
 
-                Log.i("PicUri = ",""+ musicUri);
-
-                this.saveMusic(currentMusic, musicUri);
+                this.saveMusic(musicUri);
                 this.loadMusic();
-            };
-        };
-
+            }
+            ;
+        }
+        ;
     }
 
-    public void loadMusic(){
-        for(int i = 0; i<1;i++) {
+    public void loadMusic() {
+
             String uri = saveM.getString("music", null);
             Log.i("SAVE MUSIC", "Uri = " + musicUri);
-
-        if (uri != null) {
-            Uri parsedUri = Uri.parse(uri);
-            musicUri = parsedUri;
-            loadMusic();
         }
 
-        }
-    }
 
-    public void saveMusic(int index, Uri musicUri) {
-        muUri[index] = musicUri;
+    public void saveMusic(Uri musicUri) {
 
         SharedPreferences.Editor editor = saveM.edit();
-        editor.putString("music" + index, musicUri.toString());
+        editor.putString("music",musicUri.toString());
         editor.commit();
 
-        Log.i("SAVE MUSIC", "Uri: " + musicUri + ", index: " + index);
+        Log.i("SAVE MUSIC", "Uri: " + musicUri);
     }
 }
-
-
 
 
 //neu
