@@ -34,6 +34,7 @@ public class ShowActivity extends AppCompatActivity {
     ImageSwitcher imageSwitcher;
     MediaPlayer mMediaPlayer;
     private int currentIndex;
+    private Uri url;
     private SharedPreferences shareMusic, shareImage;
     private final int[] imageNames =
             {R.drawable.picture1, R.drawable.picture2, R.drawable.picture3, R.drawable.picture4, R.drawable.picture5, R.drawable.picture6};
@@ -66,10 +67,7 @@ public class ShowActivity extends AppCompatActivity {
             private int index = 0;
 
             public void run() {
-                imageSwitcher.setImageResource((imageNames[index]));
-                if (index == (imageNames.length - 1))
-                    index = 0;
-                else
+                imageSwitcher.setImageURI(url);
                     index++;
                 imageSwitcher.postDelayed(this, 5000);
             }
@@ -100,7 +98,7 @@ public class ShowActivity extends AppCompatActivity {
         myMap = shareImage.getAll();
         //array für die images
         String myImages[] = new String[6];
-        //todo iterate over array
+
         String MapString;
         for(Map.Entry<String, ?> entry: myMap.entrySet()) {
             MapString = entry.getValue().toString();
@@ -112,7 +110,7 @@ public class ShowActivity extends AppCompatActivity {
     private void showImage(int imgIndex) {
         int imageName = this.imageNames[imgIndex];
 
-        int resId = getDrawableResIdByName(String.valueOf(imageName));
+        int resId = getDrawableResIdByName(String.valueOf(url));
         if (resId != 0) {
             this.imageSwitcher.setImageResource(resId);
         }

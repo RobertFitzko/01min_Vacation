@@ -172,7 +172,7 @@ public class SelectPicsActivity extends AppCompatActivity {
             //falls das Bild nicht gefunden werden kann
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            
+
         }
 
     }
