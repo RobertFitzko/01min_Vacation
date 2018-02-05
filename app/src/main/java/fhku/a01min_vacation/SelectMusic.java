@@ -32,10 +32,8 @@ public class SelectMusic extends AppCompatActivity {
     public Uri musicUri;
     //in der saveM müsste es jetzt drinnen sein
     public SharedPreferences saveM;
+    public Uri[] muUri = new Uri[1];
     public int currentMusic;
-    MediaPlayer mp, mnp;
-    Context c;
-    Uri uri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +65,7 @@ public class SelectMusic extends AppCompatActivity {
 
                 //impliziter Intent für Gallerie
                 Intent musicPickerIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT, android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
-                Log.i("Music Picker",musicPickerIntent.toString());
+                Log.i("Music Picker", musicPickerIntent.toString());
                 File musicDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
                 String musicDirectoryPath = musicDirectory.getPath();
                 Log.i("Music Path", musicDirectoryPath);
@@ -75,7 +73,10 @@ public class SelectMusic extends AppCompatActivity {
                 Uri dataM = Uri.parse(musicDirectoryPath);
                 //Activity for Result aufrufen
                 startActivityForResult(musicPickerIntent, MUSIC_GALLERY_REQUEST);
+
+
 //neu
+                /*
                 try{
                     saveM = getSharedPreferences("musicDirectoryPath",0);
                     String audiouri = saveM.getString("musicDirectoryPath", null);
@@ -90,13 +91,61 @@ public class SelectMusic extends AppCompatActivity {
                 }catch (Exception e){
                     e.printStackTrace();
                 }
+                */
 
             }
+
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if ( resultCode == RESULT_OK) {
+            //wenn es sich wirklich um einen aufruf von unseren buttons handelt
+            if(requestCode==IMAGE_GALLERY_REQUEST){
+                Uri imageUri = data.getData();
+
+                Log.i("PicUri = ",""+ musicUri);
+
+                this.saveMusic(currentMusic, musicUri);
+                this.loadMusic();
+            };
+        };
 
     }
 
+    public void loadMusic(){
+        for(int i = 0; i<1;i++) {
+            String uri = saveM.getString("music", null);
+            Log.i("SAVE MUSIC", "Uri = " + musicUri);
+
+        if (uri != null) {
+            Uri parsedUri = Uri.parse(uri);
+            musicUri = parsedUri;
+            loadMusic();
+        }
+
+        }
+    }
+
+    public void saveMusic(int index, Uri musicUri) {
+        muUri[index] = musicUri;
+
+        SharedPreferences.Editor editor = saveM.edit();
+        editor.putString("music" + index, musicUri.toString());
+        editor.commit();
+
+        Log.i("SAVE MUSIC", "Uri: " + musicUri + ", index: " + index);
+    }
+}
+
+
+
+
 //neu
+
+    /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent dataM) {
         super.onActivityResult(requestCode, resultCode, dataM);
