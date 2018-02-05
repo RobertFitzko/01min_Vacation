@@ -117,6 +117,7 @@ public class SelectPicsActivity extends AppCompatActivity {
         if ( resultCode == RESULT_OK) {
             //wenn es sich wirklich um einen aufruf von unseren buttons handelt
             if(requestCode==IMAGE_GALLERY_REQUEST){
+                //Uri imageUri = data.getData(); // dont know if thats right
                 Uri imageUri = data.getData();
 
                 Log.i("PicUri = ",""+ imageUri);

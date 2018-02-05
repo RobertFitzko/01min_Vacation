@@ -19,17 +19,22 @@ import android.widget.LinearLayout;
 import android.widget.ViewFlipper;
 import android.widget.ViewSwitcher;
 
+import java.lang.reflect.Array;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 public class ShowActivity extends AppCompatActivity {
 
-    SharedPreferences sp = getSharedPreferences("01minute", MODE_PRIVATE);
     ImageSwitcher imageSwitcher;
     MediaPlayer mMediaPlayer;
     private int currentIndex;
+    private SharedPreferences shareMusic, shareImage;
     private final int[] imageNames =
             {R.drawable.picture1, R.drawable.picture2, R.drawable.picture3, R.drawable.picture4, R.drawable.picture5, R.drawable.picture6};
 
@@ -37,10 +42,8 @@ public class ShowActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
+        init();
 
-        //Zum auselesn der Shared preferences?!
-/*        String value=(sp.getString("image", null));
-        Log.i("AUSGELESEN","ist:"+value);*/
 
         //Mediaplayer für Musik im Hintergrund, momentan mit fixer Musik
         mMediaPlayer = new MediaPlayer();
@@ -85,6 +88,25 @@ public class ShowActivity extends AppCompatActivity {
         });
         this.currentIndex = 0;
         this.showImage(this.currentIndex);
+    }
+
+    public void init(){
+        shareMusic = getSharedPreferences("myprefs",MODE_PRIVATE);
+        shareImage = getSharedPreferences("01Minute", MODE_PRIVATE);
+
+        //map erstellen
+        Map<String, ?> myMap = new HashMap();
+        //map zuweisen
+        myMap = shareImage.getAll();
+        //array für die images
+        String myImages[] = new String[6];
+        //todo iterate over array
+        String MapString;
+        for(Map.Entry<String, ?> entry: myMap.entrySet()) {
+            MapString = entry.getValue().toString();
+            Uri url = Uri.parse(MapString);
+            //imageSwitcher.setImageURI(url);
+        }
     }
 
     private void showImage(int imgIndex) {
