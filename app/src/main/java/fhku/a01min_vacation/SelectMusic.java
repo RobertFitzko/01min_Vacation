@@ -67,23 +67,25 @@ public class SelectMusic extends AppCompatActivity {
 
                 //impliziter Intent für Gallerie
                 Intent musicPickerIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT, android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
-
+                Log.i("Music Picker",musicPickerIntent.toString());
                 File musicDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
                 String musicDirectoryPath = musicDirectory.getPath();
-
+                Log.i("Music Path", musicDirectoryPath);
+                //da haben wir das path schon mit musicDirectoryPath
                 Uri dataM = Uri.parse(musicDirectoryPath);
                 //Activity for Result aufrufen
                 startActivityForResult(musicPickerIntent, MUSIC_GALLERY_REQUEST);
 //neu
                 try{
-                    saveM = getSharedPreferences("mypref",0);
-                    String audiouri = saveM.getString("music", null);
+                    saveM = getSharedPreferences("musicDirectoryPath",0);
+                    String audiouri = saveM.getString("musicDirectoryPath", null);
                     if (audiouri !=null) {
                         Uri mUri = Uri.parse(audiouri);
                         mnp.setAudioStreamType(AudioManager.STREAM_MUSIC);
                         mnp.setDataSource(c, mUri);
                         mnp.prepare();
                         mnp.start();
+                        Log.i("Shared Path", audiouri);
                     }
                 }catch (Exception e){
                     e.printStackTrace();
@@ -93,6 +95,7 @@ public class SelectMusic extends AppCompatActivity {
         });
 
     }
+
 //neu
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent dataM) {
@@ -122,6 +125,7 @@ public class SelectMusic extends AppCompatActivity {
         }
 
     }
+
 }
 
 
