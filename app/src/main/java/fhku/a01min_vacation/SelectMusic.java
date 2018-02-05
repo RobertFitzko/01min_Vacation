@@ -71,6 +71,7 @@ public class SelectMusic extends AppCompatActivity {
                 Log.i("Music Path", musicDirectoryPath);
                 //da haben wir das path schon mit musicDirectoryPath
                 Uri dataM = Uri.parse(musicDirectoryPath);
+                dataM = musicUri;
                 //Activity for Result aufrufen
                 startActivityForResult(musicPickerIntent, MUSIC_GALLERY_REQUEST);
 
@@ -103,8 +104,8 @@ public class SelectMusic extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if ( resultCode == RESULT_OK) {
             //wenn es sich wirklich um einen aufruf von unseren buttons handelt
-            if(requestCode==IMAGE_GALLERY_REQUEST){
-                Uri imageUri = data.getData();
+            if(requestCode==MUSIC_GALLERY_REQUEST){
+                Uri musicUri = data.getData();
 
                 Log.i("PicUri = ",""+ musicUri);
 
