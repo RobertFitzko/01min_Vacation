@@ -36,9 +36,9 @@ public class ShowActivity extends AppCompatActivity {
     private int currentIndex;
     private Uri url;
     private SharedPreferences shareMusic, shareImage;
-    private final int[] imageNames =
+    /*private final int[] imageNames =
             {R.drawable.picture1, R.drawable.picture2, R.drawable.picture3, R.drawable.picture4, R.drawable.picture5, R.drawable.picture6};
-
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
