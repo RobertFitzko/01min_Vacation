@@ -84,12 +84,11 @@ public class ShowActivity extends AppCompatActivity {
                 return imageView;
             }
         });
-        this.currentIndex = 0;
-        this.showImage(this.currentIndex);
+
     }
 
     public void init(){
-        shareMusic = getSharedPreferences("myprefs",MODE_PRIVATE);
+        shareMusic = getSharedPreferences("01Minute",MODE_PRIVATE);
         shareImage = getSharedPreferences("01Minute", MODE_PRIVATE);
 
         //map erstellen
@@ -107,22 +106,7 @@ public class ShowActivity extends AppCompatActivity {
         }
     }
 
-    private void showImage(int imgIndex) {
-        int imageName = this.imageNames[imgIndex];
 
-        int resId = getDrawableResIdByName(String.valueOf(url));
-        if (resId != 0) {
-            this.imageSwitcher.setImageResource(resId);
-        }
-    }
-
-    public int getDrawableResIdByName(String resName) {
-        String pkgName = this.getPackageName();
-        // Return 0 if not found.
-        int resID = this.getResources().getIdentifier(resName, "drawable", pkgName);
-        Log.i("MyLog", "Res Name: " + resName + "==> Res ID = " + resID);
-        return resID;
-    }
 
     //damit die Musik endet wenn man die Activity verlässt
     @Override
