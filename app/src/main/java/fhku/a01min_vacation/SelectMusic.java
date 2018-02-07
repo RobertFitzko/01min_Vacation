@@ -40,7 +40,7 @@ public class SelectMusic extends AppCompatActivity {
     }
 
     public void init() {
-        saveM = getSharedPreferences("01Minute", MODE_PRIVATE);
+        saveM = getSharedPreferences("music", MODE_PRIVATE);
 
         getMusic = findViewById(R.id.get_music);
         getMusic.setOnClickListener(new View.OnClickListener() {

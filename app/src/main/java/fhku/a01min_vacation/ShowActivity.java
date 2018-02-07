@@ -28,6 +28,7 @@ import android.widget.ViewFlipper;
 import android.widget.ViewSwitcher;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.net.URI;
@@ -51,6 +52,7 @@ public class ShowActivity extends AppCompatActivity {
     ArrayList<Uri> list = new ArrayList<Uri>();
     private int counter = 0;
     private Uri url;
+    private Uri murl;
     private SharedPreferences shareMusic, shareImage;
     Map<String, ?> myMap = new HashMap();
     Map<String, ?> myMusicMap = new HashMap();
@@ -59,19 +61,20 @@ public class ShowActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
+        init();
 
         //Mediaplayer für Musik im Hintergrund, momentan mit fixer Musik
         mMediaPlayer = new MediaPlayer();
-        mMediaPlayer = MediaPlayer.create(this, R.raw.song);
+        mMediaPlayer=MediaPlayer.create(this,murl);
         mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mMediaPlayer.setLooping(true);
         mMediaPlayer.start();
-        init();
 
         final ImageView backgroundImageView = findViewById(R.id.imageview1);
         final Handler handler = new Handler();
         Runnable r = new Runnable() {
             int i = 0;
+
             public void run() {
                 backgroundImageView.setImageURI(list.get(i));
                 i++;
@@ -85,12 +88,12 @@ public class ShowActivity extends AppCompatActivity {
     }
 
     public void init() {
-        shareMusic = getSharedPreferences("01Minute", MODE_PRIVATE);
+        shareMusic = getSharedPreferences("music", MODE_PRIVATE);
         shareImage = getSharedPreferences("01Minute", MODE_PRIVATE);
 
         //map zuweisen
         myMap = shareImage.getAll();
-        myMusicMap=shareMusic.getAll();
+        myMusicMap = shareMusic.getAll();
 
         //array für die images
         String MapString;
@@ -98,32 +101,13 @@ public class ShowActivity extends AppCompatActivity {
             MapString = entry.getValue().toString();
             Uri url = Uri.parse(MapString);
             counter++;
-            loadImage(url);
             list.add(url);
         }
 
         String MusicMapString;
         for (Map.Entry<String, ?> entry : myMusicMap.entrySet()) {
             MusicMapString = entry.getValue().toString();
-            Uri murl = Uri.parse(MusicMapString);
-            counter++;
-        }
-    }
-
-    public void loadImage(Uri imageUri) {
-        //input stream für Bilder mit nötigem trycatch
-        InputStream inputStream;
-
-        for (int i = 0; i < list.size(); i++) {
-            try {
-                inputStream = getContentResolver().openInputStream(imageUri);
-                //get bitmap from stream
-                Bitmap image = BitmapFactory.decodeStream(inputStream);
-
-                //falls das Bild nicht gefunden werden kann
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            murl = Uri.parse(MusicMapString);
         }
     }
 
@@ -132,7 +116,6 @@ public class ShowActivity extends AppCompatActivity {
     public void onBackPressed() {
         mMediaPlayer.stop();
         finish();
-        return;
     }
 }
 
