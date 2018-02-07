@@ -49,15 +49,10 @@ public class ShowActivity extends AppCompatActivity {
     MediaPlayer mMediaPlayer;
     ImageView peter;
     ArrayList<Uri> list = new ArrayList<Uri>();
-    Bitmap image;
     private int counter = 0;
-    private int currentIndex;
     private Uri url;
-    private Button startButton;
     private SharedPreferences shareMusic, shareImage;
     Map<String, ?> myMap = new HashMap();
-    private final int[] imageNames =
-            {R.drawable.picture1, R.drawable.picture2, R.drawable.picture3, R.drawable.picture4, R.drawable.picture5, R.drawable.picture6};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,15 +68,13 @@ public class ShowActivity extends AppCompatActivity {
         init();
 
         final ImageView backgroundImageView = findViewById(R.id.imageview1);
-
         final Handler handler = new Handler();
         Runnable r = new Runnable() {
             int i = 0;
-
             public void run() {
                 backgroundImageView.setImageURI(list.get(i));
                 i++;
-                if (i >= imageNames.length) {
+                if (i >= list.size()) {
                     i = 0;
                 }
                 handler.postDelayed(this, 1000);
@@ -90,25 +83,20 @@ public class ShowActivity extends AppCompatActivity {
         handler.postDelayed(r, 300);
     }
 
-
     public void init() {
         shareMusic = getSharedPreferences("01Minute", MODE_PRIVATE);
         shareImage = getSharedPreferences("01Minute", MODE_PRIVATE);
-
         //map zuweisen
         myMap = shareImage.getAll();
         //array für die images
-
         String MapString;
         for (Map.Entry<String, ?> entry : myMap.entrySet()) {
             MapString = entry.getValue().toString();
             Uri url = Uri.parse(MapString);
             counter++;
             loadImage(url);
-
             list.add(url);
         }
-
     }
 
     public void loadImage(Uri imageUri) {
@@ -124,12 +112,9 @@ public class ShowActivity extends AppCompatActivity {
                 //falls das Bild nicht gefunden werden kann
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-
             }
-
         }
     }
-
 
     //damit die Musik endet wenn man die Activity verlässt
     @Override
