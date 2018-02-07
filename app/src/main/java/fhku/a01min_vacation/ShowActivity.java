@@ -48,7 +48,8 @@ public class ShowActivity extends AppCompatActivity {
 
     MediaPlayer mMediaPlayer;
     ImageView peter;
-    List<Uri> list = new ArrayList();
+    ArrayList<Uri> list = new ArrayList<Uri>();
+    Bitmap image;
     private int counter = 0;
     private int currentIndex;
     private Uri url;
@@ -63,36 +64,35 @@ public class ShowActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
 
-
         //Mediaplayer für Musik im Hintergrund, momentan mit fixer Musik
         mMediaPlayer = new MediaPlayer();
         mMediaPlayer = MediaPlayer.create(this, R.raw.song);
         mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mMediaPlayer.setLooping(true);
         mMediaPlayer.start();
-
+        init();
 
         final ImageView backgroundImageView = findViewById(R.id.imageview1);
 
-            final Handler handler = new Handler();
-            Runnable r = new Runnable() {
-                int i=1;
-                public void run() {
+        final Handler handler = new Handler();
+        Runnable r = new Runnable() {
+            int i = 0;
 
-                    backgroundImageView.setImageResource(imageNames[i]);
-                    i++;
-                    if (i >= imageNames.length) {
-                        i = 0;
-                    }
-                    handler.postDelayed(this, 1000);
+            public void run() {
+                backgroundImageView.setImageURI(list.get(i));
+                i++;
+                if (i >= imageNames.length) {
+                    i = 0;
                 }
-            };
-            handler.postDelayed(r, 300);
-        }
+                handler.postDelayed(this, 1000);
+            }
+        };
+        handler.postDelayed(r, 300);
+    }
 
-/*
-    public void init(){
-        shareMusic = getSharedPreferences("01Minute",MODE_PRIVATE);
+
+    public void init() {
+        shareMusic = getSharedPreferences("01Minute", MODE_PRIVATE);
         shareImage = getSharedPreferences("01Minute", MODE_PRIVATE);
 
         //map zuweisen
@@ -100,33 +100,35 @@ public class ShowActivity extends AppCompatActivity {
         //array für die images
 
         String MapString;
-        for(Map.Entry<String, ?> entry: myMap.entrySet()) {
+        for (Map.Entry<String, ?> entry : myMap.entrySet()) {
             MapString = entry.getValue().toString();
             Uri url = Uri.parse(MapString);
             counter++;
             loadImage(url);
+
+            list.add(url);
         }
 
     }
+
     public void loadImage(Uri imageUri) {
         //input stream für Bilder mit nötigem trycatch
         InputStream inputStream;
 
-       try {
-            inputStream = getContentResolver().openInputStream(imageUri);
-            //get bitmap from stream
-           Bitmap image = BitmapFactory.decodeStream(inputStream);
+        for (int i = 0; i < list.size(); i++) {
+            try {
+                inputStream = getContentResolver().openInputStream(imageUri);
+                //get bitmap from stream
+                Bitmap image = BitmapFactory.decodeStream(inputStream);
 
-           Drawable drawable =new BitmapDrawable(getApplicationContext().getResources(),Bitmap.createBitmap(image));
-           .setImageDrawable(drawable);
+                //falls das Bild nicht gefunden werden kann
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
 
-            //falls das Bild nicht gefunden werden kann
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            }
 
         }
-
-    }*/
+    }
 
 
     //damit die Musik endet wenn man die Activity verlässt
