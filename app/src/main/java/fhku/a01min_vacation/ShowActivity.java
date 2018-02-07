@@ -41,18 +41,19 @@ import java.util.Set;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static fhku.a01min_vacation.R.anim.abc_slide_in_bottom;
 import static fhku.a01min_vacation.R.id.pic1;
 import static java.lang.Thread.sleep;
 
 public class ShowActivity extends AppCompatActivity {
 
     MediaPlayer mMediaPlayer;
-    ImageView peter;
     ArrayList<Uri> list = new ArrayList<Uri>();
     private int counter = 0;
     private Uri url;
     private SharedPreferences shareMusic, shareImage;
     Map<String, ?> myMap = new HashMap();
+    Map<String, ?> myMusicMap = new HashMap();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +78,7 @@ public class ShowActivity extends AppCompatActivity {
                 if (i >= list.size()) {
                     i = 0;
                 }
-                handler.postDelayed(this, 1000);
+                handler.postDelayed(this, 4000);
             }
         };
         handler.postDelayed(r, 300);
@@ -86,8 +87,11 @@ public class ShowActivity extends AppCompatActivity {
     public void init() {
         shareMusic = getSharedPreferences("01Minute", MODE_PRIVATE);
         shareImage = getSharedPreferences("01Minute", MODE_PRIVATE);
+
         //map zuweisen
         myMap = shareImage.getAll();
+        myMusicMap=shareMusic.getAll();
+
         //array für die images
         String MapString;
         for (Map.Entry<String, ?> entry : myMap.entrySet()) {
@@ -96,6 +100,13 @@ public class ShowActivity extends AppCompatActivity {
             counter++;
             loadImage(url);
             list.add(url);
+        }
+
+        String MusicMapString;
+        for (Map.Entry<String, ?> entry : myMusicMap.entrySet()) {
+            MusicMapString = entry.getValue().toString();
+            Uri murl = Uri.parse(MusicMapString);
+            counter++;
         }
     }
 

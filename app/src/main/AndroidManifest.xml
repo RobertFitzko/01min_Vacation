@@ -19,7 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/vac">
-        <activity android:label="Willkommen bei 01 Minute Vacation" android:name=".MainActivity">
+        <activity android:label="01 Minute Vacation" android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
